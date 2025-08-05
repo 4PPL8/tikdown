@@ -26,7 +26,7 @@ TikDown is a web application that allows users to download TikTok videos without
 
 Before running this application, make sure you have the following installed:
 
-- Node.js (v14 or higher)
+- Node.js (v16.x recommended for compatibility with Netlify)
 - npm or yarn
 - Python (v3.6 or higher)
 - yt-dlp
@@ -100,6 +100,16 @@ npm start
 ```
 
 ## Deployment
+
+### Netlify Deployment
+
+This application is configured for deployment on Netlify using the `netlify.toml` file, which specifies:
+
+- Build command: `npm run build`
+- Publish directory: `frontend/build`
+- Node.js version: 16.x (for compatibility with Netlify)
+
+Note that the backend requires a separate deployment (e.g., on Heroku, Render, or similar services).
 
 ### Frontend Deployment (Vercel)
 
