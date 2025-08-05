@@ -4,6 +4,7 @@ import VideoPreview from '../components/VideoPreview';
 import DownloadButton from '../components/DownloadButton';
 
 const Home = () => {
+  // eslint-disable-next-line no-unused-vars
   const [videoUrl, setVideoUrl] = useState('');
   const [videoData, setVideoData] = useState(null);
   const [loading, setLoading] = useState(false);
