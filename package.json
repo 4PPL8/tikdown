@@ -1,0 +1,26 @@
+{
+  "name": "tikdown",
+  "version": "1.0.0",
+  "description": "TikTok video downloader without watermark",
+  "main": "setup.js",
+  "scripts": {
+    "setup": "node setup.js",
+    "frontend": "cd frontend && npm start",
+    "backend": "cd backend && npm run dev",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "start": "cd backend && npm start"
+  },
+  "keywords": [
+    "tiktok",
+    "downloader",
+    "video"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.11"
+  }
+}
