@@ -109,7 +109,29 @@ This application is configured for deployment on Netlify using the `netlify.toml
 - Publish directory: `frontend/build`
 - Node.js version: 16.x (for compatibility with Netlify)
 
-Note that the backend requires a separate deployment (e.g., on Heroku, Render, or similar services).
+**Deployment Instructions:**
+
+1. **Frontend Deployment (Netlify):**
+   - Push your code to GitHub
+   - Connect your GitHub repository to Netlify
+   - Netlify will automatically use the settings in netlify.toml
+   - The build command is set to install dependencies and build the frontend
+   - The publish directory is set to frontend/build
+
+2. **Backend Deployment (Render, Railway, or similar):**
+   - Push your code to GitHub
+   - Connect your GitHub repository to your chosen platform
+   - Configure the build settings:
+     - Build Command: `npm install`
+     - Start Command: `npm start`
+   - Make sure Python 3.6+ and yt-dlp are available in the environment
+   - Set environment variables as needed (e.g., PORT, FRONTEND_URL)
+
+3. **Connect Frontend to Backend:**
+   - After deploying the backend, get the URL of your backend API
+   - Update the `proxy` field in frontend/package.json to point to your backend URL
+   - Alternatively, update the API endpoint URLs in your frontend code
+   - Redeploy the frontend to apply these changes
 
 ### Frontend Deployment (Vercel)
 
@@ -128,13 +150,20 @@ Note that the backend requires a separate deployment (e.g., on Heroku, Render, o
    - Start Command: `npm start`
 
 ## Environment Variables
-
-Create a `.env` file in the backend directory with the following variables:
+Create a .env file in the backend directory using the provided .env.example template:
 
 ```
+# Backend server port
 PORT=5000
+
+# Frontend URL for CORS configuration
 FRONTEND_URL=http://localhost:3000
+
+# Set to 'production' in production environment
+NODE_ENV=development
 ```
+
+When deploying to a hosting service, make sure to set these environment variables in your hosting platform's dashboard.
 
 ## License
 
