@@ -129,8 +129,8 @@ This application is configured for deployment on Netlify using the `netlify.toml
 
 3. **Connect Frontend to Backend:**
    - After deploying the backend, get the URL of your backend API
-   - Update the `proxy` field in frontend/package.json to point to your backend URL
-   - Alternatively, update the API endpoint URLs in your frontend code
+   - Set the `REACT_APP_BACKEND_URL` environment variable in your Netlify deployment settings to point to your backend URL
+   - Alternatively, create a `.env.production` file in the frontend directory with `REACT_APP_BACKEND_URL=https://your-backend-url.com`
    - Redeploy the frontend to apply these changes
 
 ### Frontend Deployment (Vercel)
@@ -150,6 +150,8 @@ This application is configured for deployment on Netlify using the `netlify.toml
    - Start Command: `npm start`
 
 ## Environment Variables
+
+### Backend Environment Variables
 Create a .env file in the backend directory using the provided .env.example template:
 
 ```
@@ -161,6 +163,15 @@ FRONTEND_URL=http://localhost:3000
 
 # Set to 'production' in production environment
 NODE_ENV=development
+```
+
+### Frontend Environment Variables
+Create .env, .env.development, and .env.production files in the frontend directory:
+
+```
+# Backend API URL
+REACT_APP_BACKEND_URL=http://localhost:5000  # for development
+REACT_APP_BACKEND_URL=https://your-backend-url.com  # for production
 ```
 
 When deploying to a hosting service, make sure to set these environment variables in your hosting platform's dashboard.
