@@ -4,8 +4,9 @@ const VideoPreview = ({ videoData }) => {
   if (!videoData) return null;
 
   // Get the full URL by combining the base URL with the relative path
-  const baseUrl = process.env.REACT_APP_BACKEND_URL || window.location.origin.replace('3000', '5000');
-  const fullVideoUrl = `${baseUrl}${videoData.videoUrl}`;
+  const baseUrl = process.env.REACT_APP_BACKEND_URL || '';
+  // Ensure videoUrl is properly formatted with the backend URL
+  const fullVideoUrl = videoData.videoUrl.startsWith('http') ? videoData.videoUrl : `${baseUrl}${videoData.videoUrl}`;
 
   return (
     <div className="bg-gray-900 bg-opacity-50 rounded-lg overflow-hidden shadow-lg mb-6">

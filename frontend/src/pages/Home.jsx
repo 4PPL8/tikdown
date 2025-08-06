@@ -17,8 +17,15 @@ const Home = () => {
     setError(null);
     
     try {
-      // This would be replaced with actual API call
-      const response = await fetch('/api/download', {
+      // Get the backend URL from environment variables
+      const baseUrl = process.env.REACT_APP_BACKEND_URL || '';
+      // Ensure we're using the full backend URL and not a relative path
+      const apiUrl = `${baseUrl}/api/download`;
+      
+      console.log('Using API URL:', apiUrl);
+      
+      // Make the API call with the correct URL
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

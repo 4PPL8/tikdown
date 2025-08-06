@@ -5,8 +5,9 @@ const DownloadButton = ({ videoData }) => {
 
   const handleDownload = () => {
     // Get the full URL by combining the base URL with the relative path
-    const baseUrl = process.env.REACT_APP_BACKEND_URL || window.location.origin.replace('3000', '5000');
-    const fullDownloadUrl = `${baseUrl}${videoData.downloadUrl}`;
+    const baseUrl = process.env.REACT_APP_BACKEND_URL || '';
+    // Ensure downloadUrl is properly formatted with the backend URL
+    const fullDownloadUrl = videoData.downloadUrl.startsWith('http') ? videoData.downloadUrl : `${baseUrl}${videoData.downloadUrl}`;
     
     console.log('Download URL:', fullDownloadUrl);
     
