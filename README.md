@@ -141,13 +141,22 @@ This application is configured for deployment on Netlify using the `netlify.toml
    - Build Command: `npm run build`
    - Output Directory: `build`
 
-### Backend Deployment (Railway or Render)
+### Backend Deployment (Railway, Render, or Fly.io)
 
+#### Railway or Render
 1. Push your code to GitHub
 2. Connect your GitHub repository to Railway or Render
 3. Configure the build settings:
    - Build Command: `npm install`
    - Start Command: `npm start`
+
+#### Fly.io Deployment
+1. Install the Fly.io CLI: `curl -L https://fly.io/install.sh | sh`
+2. Login to Fly.io: `fly auth login`
+3. Deploy the application: `fly deploy`
+4. Set environment variables: `fly secrets set FRONTEND_URL=https://your-frontend-url.com`
+
+For detailed instructions, see the [FLY_IO_DEPLOYMENT.md](./FLY_IO_DEPLOYMENT.md) file.
 
 ## Environment Variables
 
