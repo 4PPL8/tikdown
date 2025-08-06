@@ -61,8 +61,23 @@ app.post('/api/download', async (req, res) => {
       'Transfer-Encoding': 'chunked'
     });
     
+    // Determine Python executable path (use virtual environment if available)
+    let pythonExecutable = 'python';
+    
+    // Check if we're in the virtual environment
+    if (fs.existsSync(path.join(__dirname, 'venv', 'bin', 'python'))) {
+      pythonExecutable = path.join(__dirname, 'venv', 'bin', 'python');
+      console.log('Using virtual environment Python:', pythonExecutable);
+    } else if (fs.existsSync(path.join(__dirname, 'venv', 'Scripts', 'python.exe'))) {
+      // Windows path
+      pythonExecutable = path.join(__dirname, 'venv', 'Scripts', 'python.exe');
+      console.log('Using virtual environment Python (Windows):', pythonExecutable);
+    } else {
+      console.log('Using system Python');
+    }
+    
     // Run the Python script using spawn
-    const pythonProcess = spawn('python', [pythonScript, url, outputPath]);
+    const pythonProcess = spawn(pythonExecutable, [pythonScript, url, outputPath]);
     
     let scriptOutput = '';
     let scriptError = '';

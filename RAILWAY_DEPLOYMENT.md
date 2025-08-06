@@ -36,6 +36,15 @@ In your Railway dashboard, go to the "Variables" tab and add the following envir
 
 If you encounter errors related to Python or pip not being found, the `nixpacks.toml` file should resolve this by installing Python and pip during the build process.
 
+#### Externally Managed Environment Error
+
+If you encounter an "externally-managed-environment" error when trying to install Python packages, the `nixpacks.toml` file has been configured to create a Python virtual environment to resolve this issue. The configuration:
+
+1. Installs `python3-venv` package
+2. Creates a virtual environment in the backend directory
+3. Activates the virtual environment before installing packages
+4. Ensures the virtual environment is activated when starting the application
+
 #### yt-dlp Installation Issues
 
 If yt-dlp fails to install or run:
