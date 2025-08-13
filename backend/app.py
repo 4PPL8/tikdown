@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException, Request, Response, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse, FileResponse
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, validator  # Using validator from Pydantic v1
 import os
 import json
 import subprocess
