@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: tikdown-backend
+    runtime: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && uvicorn app:app --host 0.0.0.0 --port 10000
+    envVars:
+      - key: FRONTEND_URL
+        value: https://tikdown.netlify.app
+        # Replace with your actual frontend URL
+    autoDeploy: true

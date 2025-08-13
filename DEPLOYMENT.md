@@ -24,18 +24,40 @@
 
 ### Backend (Render.com)
 
-1. **Environment Variables**
-   - Set the following environment variables in your Render.com dashboard:
-     - `PORT`: The port your server will run on (usually set automatically by Render)
+1. **Step-by-Step Deployment Guide**
+
+   **Option 1: Using render.yaml (Recommended)**
+   - Create an account on [Render](https://render.com) if you don't have one
+   - Push your code to GitHub including the `render.yaml` file
+   - In Render dashboard, click on "Blueprint" and select your repository
+   - Render will automatically configure the service based on the render.yaml file
+   - Review the settings and click "Apply"
+
+   **Option 2: Manual Configuration**
+   - Create an account on [Render](https://render.com) if you don't have one
+   - Click on "New +" and select "Web Service"
+   - Connect your GitHub repository
+   - Configure the service:
+     - Name: Choose a name for your service (e.g., "tikdown-backend")
+     - Region: Select a region close to your users
+     - Branch: main (or your branch name)
+     - Runtime: Python 3.10+
+     - Build Command: `pip install -r requirements.txt`
+     - Start Command: `uvicorn app:app --host 0.0.0.0 --port 10000`
+     - Plan: Free (or select a paid plan for better performance)
+
+2. **Environment Variables**
+   - After creating the service, go to the "Environment" tab
+   - Add the following environment variable:
      - `FRONTEND_URL`: The URL of your Netlify frontend (e.g., `https://tikdown.netlify.app`)
 
-2. **Build Settings**
-   - Build command: `npm install`
-   - Start command: `npm start`
-
 3. **Dependencies**
-   - Make sure Python and yt-dlp are available in the environment
-   - You may need to add a build script to install Python dependencies
+   - The requirements.txt file includes all necessary dependencies including:
+     - FastAPI
+     - Uvicorn
+     - yt-dlp
+     - Other required packages
+   - Render will automatically install these dependencies during the build process
 
 ## Troubleshooting
 
@@ -48,6 +70,12 @@ If you encounter "fetching video" errors when deployed:
    - Verify the `FRONTEND_URL` environment variable is correctly set on the backend
 
 2. **API URL Configuration**
+   - Ensure the `REACT_APP_BACKEND_URL` in your frontend environment points to your Render backend URL
+   - Check that the URL is correctly formatted with no trailing slashes
+
+3. **Python Dependencies**
+   - If you encounter issues with yt-dlp, make sure it's properly installed
+   - Render automatically installs Python packages from requirements.txt
    - Confirm the `REACT_APP_BACKEND_URL` is correctly set in Netlify environment variables
    - The URL should not have a trailing slash (e.g., use `https://tikdown-backend.onrender.com` not `https://tikdown-backend.onrender.com/`)
 

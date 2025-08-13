@@ -18,9 +18,8 @@ TikDown is a web application that allows users to download TikTok videos without
 - React Router
 
 ### Backend
-- Node.js
-- Express
-- Python (yt-dlp)
+- Python (FastAPI)
+- yt-dlp
 
 ## Prerequisites
 
@@ -58,7 +57,15 @@ npm install
 
 ```bash
 cd backend
-npm install
+python -m venv venv
+
+# On Windows
+venv\Scripts\activate
+
+# On macOS/Linux
+# source venv/bin/activate
+
+pip install -r requirements.txt
 ```
 
 ## Running the Application
@@ -78,10 +85,18 @@ The frontend will be available at http://localhost:3000
 
 ```bash
 cd backend
-npm run dev
+# Activate virtual environment first if not already activated
+
+# On Windows
+# venv\Scripts\activate
+
+# On macOS/Linux
+# source venv/bin/activate
+
+uvicorn app:app --reload
 ```
 
-The backend API will be available at http://localhost:5000
+The backend API will be available at http://localhost:8000
 
 ### Production Mode
 
@@ -96,7 +111,15 @@ npm run build
 
 ```bash
 cd backend
-npm start
+# Activate virtual environment first if not already activated
+
+# On Windows
+# venv\Scripts\activate
+
+# On macOS/Linux
+# source venv/bin/activate
+
+uvicorn app:app --host 0.0.0.0 --port 10000
 ```
 
 ## Deployment
@@ -118,14 +141,19 @@ This application is configured for deployment on Netlify using the `netlify.toml
    - The build command is set to install dependencies and build the frontend
    - The publish directory is set to frontend/build
 
-2. **Backend Deployment (Render, Railway, or similar):**
+2. **Backend Deployment (Render):**
    - Push your code to GitHub
-   - Connect your GitHub repository to your chosen platform
-   - Configure the build settings:
-     - Build Command: `npm install`
-     - Start Command: `npm start`
-   - Make sure Python 3.6+ and yt-dlp are available in the environment
-   - Set environment variables as needed (e.g., PORT, FRONTEND_URL)
+   - Create a new Web Service on Render
+   - Connect your GitHub repository
+   - Configure the service:
+     - Name: Choose a name for your service
+     - Region: Select a region close to your users
+     - Branch: main (or your branch name)
+     - Runtime: Python 3.10+
+     - Build Command: `pip install -r requirements.txt`
+     - Start Command: `uvicorn app:app --host 0.0.0.0 --port 10000`
+   - Add environment variables:
+     - `FRONTEND_URL`: Your frontend URL (e.g., https://tikdown.netlify.app)
 
 3. **Connect Frontend to Backend:**
    - After deploying the backend, get the URL of your backend API
@@ -141,22 +169,10 @@ This application is configured for deployment on Netlify using the `netlify.toml
    - Build Command: `npm run build`
    - Output Directory: `build`
 
-### Backend Deployment (Railway, Render, or Fly.io)
+### Backend Deployment (Render)
 
-#### Railway or Render
-1. Push your code to GitHub
-2. Connect your GitHub repository to Railway or Render
-3. Configure the build settings:
-   - Build Command: `npm install`
-   - Start Command: `npm start`
+See the detailed instructions in the [backend README.md](backend/README.md), [DEPLOYMENT.md](DEPLOYMENT.md), or [RENDER_DEPLOYMENT.md](RENDER_DEPLOYMENT.md) file for step-by-step instructions on deploying the backend to Render.
 
-#### Fly.io Deployment
-1. Install the Fly.io CLI: `curl -L https://fly.io/install.sh | sh`
-2. Login to Fly.io: `fly auth login`
-3. Deploy the application: `fly deploy`
-4. Set environment variables: `fly secrets set FRONTEND_URL=https://your-frontend-url.com`
-
-For detailed instructions, see the [FLY_IO_DEPLOYMENT.md](./FLY_IO_DEPLOYMENT.md) file.
 
 ## Environment Variables
 
